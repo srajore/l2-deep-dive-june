@@ -5,3 +5,13 @@ python-dotenv
 google-genai
 
 groq
+
+langchain-openai
+
+langchain-google-genai
+
+langchain
+
+groq<1.0 
+
+langchain-groq
