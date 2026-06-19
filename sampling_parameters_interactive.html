@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LLM Sampling Parameters: Interactive Demo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+            background: linear-gradient(135deg, #f5f5f5 0%, #fafafa 100%);
+            color: #2c2c2a;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            padding: 2.5rem;
+        }
+
+        header {
+            margin-bottom: 2.5rem;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 1.5rem;
+        }
+
+        h1 {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #185FA5;
+        }
+
+        .subtitle {
+            font-size: 14px;
+            color: #888780;
+        }
+
+        .controls-section {
+            margin-bottom: 2.5rem;
+            padding: 1.5rem;
+            background: #f9f9f7;
+            border-radius: 8px;
+            border: 1px solid #e8e8e6;
+        }
+
+        .control-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .control-group:last-child {
+            margin-bottom: 0;
+        }
+
+        label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #2c2c2a;
+        }
+
+        .label-value {
+            color: #185FA5;
+            font-weight: 700;
+            font-size: 16px;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            height: 6px;
+            border-radius: 3px;
+            background: #d3d1c7;
+            outline: none;
+            -webkit-appearance: none;
+            appearance: none;
+            cursor: pointer;
+            margin: 0.75rem 0;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #185FA5;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(24, 95, 165, 0.3);
+            transition: all 0.2s ease;
+        }
+
+        input[type="range"]::-webkit-slider-thumb:hover {
+            background: #0c447c;
+            box-shadow: 0 2px 8px rgba(24, 95, 165, 0.5);
+        }
+
+        input[type="range"]::-moz-range-thumb {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #185FA5;
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 2px 4px rgba(24, 95, 165, 0.3);
+            transition: all 0.2s ease;
+        }
+
+        input[type="range"]::-moz-range-thumb:hover {
+            background: #0c447c;
+            box-shadow: 0 2px 8px rgba(24, 95, 165, 0.5);
+        }
+
+        .range-hint {
+            font-size: 12px;
+            color: #888780;
+            margin-top: 0.5rem;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .chart-section {
+            margin-bottom: 2.5rem;
+        }
+
+        .section-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #2c2c2a;
+            margin-bottom: 1rem;
+        }
+
+        svg {
+            border-radius: 8px;
+            border: 1px solid #e8e8e6;
+            background: #fafaf8;
+        }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .summary-box {
+            background: #f9f9f7;
+            border: 1px solid #e8e8e6;
+            border-radius: 8px;
+            padding: 1rem;
+        }
+
+        .summary-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: #888780;
+            margin-bottom: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .summary-content {
+            font-size: 13px;
+            line-height: 1.6;
+            color: #2c2c2a;
+        }
+
+        .final-box {
+            background: #e6f1fb;
+            border: 1px solid #85b7eb;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .final-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: #185fa5;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .final-pool {
+            font-size: 15px;
+            font-weight: 600;
+            color: #042c53;
+            margin-bottom: 0.5rem;
+        }
+
+        .final-info {
+            font-size: 12px;
+            color: #185fa5;
+        }
+
+        .teaching-note {
+            background: #faeeda;
+            border: 1px solid #ef9f27;
+            border-radius: 8px;
+            padding: 1rem;
+            font-size: 12px;
+            color: #633806;
+            line-height: 1.6;
+        }
+
+        .teaching-note strong {
+            color: #412402;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1.5rem;
+            }
+
+            h1 {
+                font-size: 22px;
+            }
+
+            .summary-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <h1>LLM Sampling Parameters Interactive Demo</h1>
+            <p class="subtitle">Explore how Temperature, TOP_K, and TOP_P affect token selection for "Cat sat on the ____"</p>
+        </header>
+
+        <!-- Controls -->
+        <div class="controls-section">
+            <div class="control-group">
+                <label>
+                    Temperature: <span class="label-value" id="temp-val">1.0</span>
+                </label>
+                <input type="range" id="temp-slider" min="0.1" max="2" step="0.1" value="1" oninput="updateAll()">
+                <div class="range-hint">
+                    <span>Cold (Greedy)</span>
+                    <span>Hot (Creative)</span>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label>
+                    TOP_K: <span class="label-value" id="topk-val">6</span> <span style="font-weight: 400; color: #888780;">(keep top K tokens)</span>
+                </label>
+                <input type="range" id="topk-slider" min="1" max="6" step="1" value="6" oninput="updateAll()">
+                <div class="range-hint">
+                    <span>Restrictive</span>
+                    <span>No filtering</span>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label>
+                    TOP_P: <span class="label-value" id="topp-val">1.00</span> <span style="font-weight: 400; color: #888780;">(cumulative probability)</span>
+                </label>
+                <input type="range" id="topp-slider" min="0.1" max="1" step="0.05" value="1" oninput="updateAll()">
+                <div class="range-hint">
+                    <span>Aggressive</span>
+                    <span>No filtering</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chart -->
+        <div class="chart-section">
+            <div class="section-title">Distribution after temperature adjustment</div>
+            <svg id="chart" width="100%" height="280" viewBox="0 0 600 280" style="display: block;"></svg>
+        </div>
+
+        <!-- Summaries -->
+        <div class="summary-grid">
+            <div class="summary-box">
+                <div class="summary-label">TOP_K Filter</div>
+                <div class="summary-content" id="topk-tokens"></div>
+            </div>
+            <div class="summary-box">
+                <div class="summary-label">TOP_P Filter</div>
+                <div class="summary-content" id="topp-tokens"></div>
+            </div>
+        </div>
+
+        <!-- Final Selection -->
+        <div class="final-box">
+            <div class="final-label">Valid Selection Pool</div>
+            <div class="final-pool" id="final-pool"></div>
+            <div class="final-info" id="final-info"></div>
+        </div>
+
+        <!-- Teaching Note -->
+        <div class="teaching-note">
+            <strong>Teaching Tip:</strong> Both TOP_K and TOP_P filters apply together—the model can only pick from tokens that pass BOTH filters. Notice how reducing TOP_P becomes more restrictive than reducing TOP_K. Try setting TOP_K=6, TOP_P=0.5 and watch which words survive.
+        </div>
+    </div>
+
+    <script>
+        // Base token data: realistic next-word probabilities for "Cat sat on the ____"
+        const baseTokens = [
+            { word: 'mat', logit: 1.25 },
+            { word: 'chair', logit: 0.92 },
+            { word: 'floor', logit: 0.57 },
+            { word: 'table', logit: 0.25 },
+            { word: 'roof', logit: -0.15 },
+            { word: 'bed', logit: -0.84 }
+        ];
+
+        /**
+         * Apply temperature-scaled softmax to logits
+         * Temperature < 1: sharpens distribution (greedy)
+         * Temperature = 1: normal softmax
+         * Temperature > 1: flattens distribution (creative)
+         */
+        function softmax(logits, temperature = 1.0) {
+            const scaled = logits.map(x => x / temperature);
+            const max = Math.max(...scaled);
+            const exp = scaled.map(x => Math.exp(x - max));
+            const sum = exp.reduce((a, b) => a + b);
+            return exp.map(x => x / sum);
+        }
+
+        function updateAll() {
+            const temp = parseFloat(document.getElementById('temp-slider').value);
+            const topK = parseInt(document.getElementById('topk-slider').value);
+            const topP = parseFloat(document.getElementById('topp-slider').value);
+
+            // Update display values
+            document.getElementById('temp-val').textContent = temp.toFixed(1);
+            document.getElementById('topk-val').textContent = topK;
+            document.getElementById('topp-val').textContent = topP.toFixed(2);
+
+            // Calculate probabilities with temperature
+            const logits = baseTokens.map(t => t.logit);
+            const probs = softmax(logits, temp);
+
+            // Create token objects with probabilities
+            let tokens = baseTokens.map((t, i) => ({
+                ...t,
+                prob: probs[i]
+            }));
+
+            // Sort by probability (for TOP_K)
+            const sorted = [...tokens].sort((a, b) => b.prob - a.prob);
+
+            // Apply TOP_K filter
+            const topKTokens = sorted.slice(0, topK);
+            const topKWords = new Set(topKTokens.map(t => t.word));
+
+            // Apply TOP_P filter
+            let cumulative = 0;
+            const topPTokens = [];
+            for (let i = 0; i < sorted.length; i++) {
+                cumulative += sorted[i].prob;
+                topPTokens.push(sorted[i]);
+                if (cumulative >= topP) break;
+            }
+            const topPWords = new Set(topPTokens.map(t => t.word));
+
+            // Final: intersection of both filters
+            const finalTokens = tokens.filter(t => topKWords.has(t.word) && topPWords.has(t.word));
+
+            // Update visualizations
+            drawChart(tokens, topKWords, topPWords);
+            updateSummary(topKTokens, topPTokens, finalTokens);
+        }
+
+        function drawChart(tokens, topKWords, topPWords) {
+            const svg = document.getElementById('chart');
+            svg.innerHTML = '';
+
+            // Sort by probability for display
+            const sorted = [...tokens].sort((a, b) => b.prob - a.prob);
+
+            const barWidth = 60;
+            const maxProb = Math.max(...sorted.map(t => t.prob));
+            const barSpacing = 90;
+            const startX = 40;
+            const chartHeight = 200;
+            const baseline = 230;
+
+            sorted.forEach((token, idx) => {
+                const x = startX + idx * barSpacing;
+                const barHeight = (token.prob / maxProb) * chartHeight;
+                const y = baseline - barHeight;
+
+                const inTopK = topKWords.has(token.word);
+                const inTopP = topPWords.has(token.word);
+                const inBoth = inTopK && inTopP;
+
+                // Determine color
+                let fillColor = '#d3d1c7';
+                let opacity = 0.3;
+
+                if (inBoth) {
+                    fillColor = '#0F6E56'; // Teal - selected
+                    opacity = 0.95;
+                } else if (inTopK) {
+                    fillColor = '#378ADD'; // Blue - filtered by TOP_P
+                    opacity = 0.5;
+                } else if (inTopP) {
+                    fillColor = '#BA7517'; // Amber - filtered by TOP_K
+                    opacity = 0.5;
+                }
+
+                // Draw bar
+                const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+                rect.setAttribute('x', x);
+                rect.setAttribute('y', y);
+                rect.setAttribute('width', barWidth);
+                rect.setAttribute('height', barHeight);
+                rect.setAttribute('fill', fillColor);
+                rect.setAttribute('opacity', opacity);
+                rect.setAttribute('rx', '3');
+                svg.appendChild(rect);
+
+                // Draw label
+                const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                text.setAttribute('x', x + barWidth / 2);
+                text.setAttribute('y', baseline + 20);
+                text.setAttribute('text-anchor', 'middle');
+                text.setAttribute('font-size', '13px');
+                text.setAttribute('font-weight', '500');
+                text.setAttribute('fill', '#2c2c2a');
+                text.textContent = token.word;
+                svg.appendChild(text);
+
+                // Draw probability value
+                const probText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                probText.setAttribute('x', x + barWidth / 2);
+                probText.setAttribute('y', y - 8);
+                probText.setAttribute('text-anchor', 'middle');
+                probText.setAttribute('font-size', '12px');
+                probText.setAttribute('fill', '#888780');
+                probText.textContent = (token.prob * 100).toFixed(1) + '%';
+                svg.appendChild(probText);
+            });
+
+            // Legend
+            const legendY = 270;
+            const legends = [
+                { label: 'Selected (both)', color: '#0F6E56' },
+                { label: 'Filtered by TOP_P', color: '#378ADD' },
+                { label: 'Filtered by TOP_K', color: '#BA7517' },
+                { label: 'Filtered out', color: '#d3d1c7' }
+            ];
+
+            let legendX = 40;
+            legends.forEach(leg => {
+                const box = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+                box.setAttribute('x', legendX);
+                box.setAttribute('y', legendY - 8);
+                box.setAttribute('width', 8);
+                box.setAttribute('height', 8);
+                box.setAttribute('fill', leg.color);
+                box.setAttribute('rx', '1');
+                svg.appendChild(box);
+
+                const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                text.setAttribute('x', legendX + 12);
+                text.setAttribute('y', legendY);
+                text.setAttribute('font-size', '11px');
+                text.setAttribute('fill', '#888780');
+                text.textContent = leg.label;
+                svg.appendChild(text);
+
+                legendX += 155;
+            });
+        }
+
+        function updateSummary(topKTokens, topPTokens, finalTokens) {
+            // TOP_K display
+            const topKDisplay = topKTokens.map(t => `${t.word} (${(t.prob * 100).toFixed(1)}%)`).join(', ');
+            document.getElementById('topk-tokens').innerHTML = `<strong>Tokens:</strong> ${topKDisplay}`;
+
+            // TOP_P display
+            const topPDisplay = topPTokens.map(t => `${t.word} (${(t.prob * 100).toFixed(1)}%)`).join(', ');
+            const topPCumulative = topPTokens.reduce((sum, t) => sum + t.prob, 0);
+            document.getElementById('topp-tokens').innerHTML = `<strong>Tokens:</strong> ${topPDisplay}<br/><strong>Cumulative:</strong> ${(topPCumulative * 100).toFixed(1)}%`;
+
+            // Final pool
+            if (finalTokens.length === 0) {
+                document.getElementById('final-pool').textContent = '⚠️ No tokens match both filters!';
+                document.getElementById('final-info').textContent = 'Make TOP_K or TOP_P less restrictive.';
+            } else {
+                const finalDisplay = finalTokens.map(t => t.word).join(', ');
+                const finalProbs = finalTokens.map(t => `${t.word}: ${(t.prob * 100).toFixed(1)}%`).join(' | ');
+                document.getElementById('final-pool').textContent = `Available to sample: ${finalDisplay}`;
+                document.getElementById('final-info').textContent = `Probabilities: ${finalProbs}`;
+            }
+        }
+
+        // Initialize on page load
+        window.addEventListener('DOMContentLoaded', updateAll);
+    </script>
+</body>
+</html>

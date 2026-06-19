@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pre-Trained Model Selection Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        main {
+            padding: 40px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-size: 1.8em;
+            color: #667eea;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .factor {
+            background: #f8f9ff;
+            border-left: 5px solid #667eea;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+        }
+
+        .factor-number {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            font-weight: bold;
+            margin-right: 15px;
+            font-size: 1.2em;
+        }
+
+        .factor-title {
+            font-size: 1.4em;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .factor-content {
+            margin-left: 55px;
+            color: #555;
+        }
+
+        .factor-content ul {
+            list-style-position: inside;
+            margin: 10px 0;
+        }
+
+        .factor-content li {
+            margin: 8px 0;
+            color: #666;
+        }
+
+        .checkmark {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            background: #4caf50;
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 20px;
+            font-size: 0.9em;
+            margin-right: 8px;
+        }
+
+        .checklist {
+            background: #e8f5e9;
+            border: 2px solid #4caf50;
+            border-radius: 8px;
+            padding: 25px;
+            margin: 30px 0;
+        }
+
+        .checklist h3 {
+            color: #2e7d32;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: center;
+            margin: 12px 0;
+            font-size: 1.05em;
+        }
+
+        .checkbox {
+            width: 24px;
+            height: 24px;
+            border: 2px solid #4caf50;
+            border-radius: 4px;
+            margin-right: 12px;
+            flex-shrink: 0;
+            background: white;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        th {
+            background: #667eea;
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        tr:hover {
+            background: #f8f9ff;
+        }
+
+        .examples-section {
+            margin-top: 30px;
+        }
+
+        .example-box {
+            background: #fff3e0;
+            border-left: 5px solid #ff9800;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+
+        .example-title {
+            font-weight: 600;
+            color: #e65100;
+            margin-bottom: 8px;
+        }
+
+        .example-content {
+            color: #666;
+        }
+
+        footer {
+            background: #f5f5f5;
+            padding: 20px;
+            text-align: center;
+            color: #666;
+            border-top: 1px solid #ddd;
+        }
+
+        .key-point {
+            background: #fff9c4;
+            border-left: 5px solid #fbc02d;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+            color: #f57f17;
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            .container {
+                box-shadow: none;
+            }
+            header {
+                page-break-after: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Pre-Trained Model Selection</h1>
+            <p class="subtitle">A Guide to Choosing the Right Model for Your Task</p>
+        </header>
+
+        <main>
+            <!-- SECTION 1: THE 6 FACTORS -->
+            <div class="section">
+                <h2 class="section-title">6 Key Factors to Consider</h2>
+
+                <!-- Factor 1 -->
+                <div class="factor">
+                    <div class="factor-title">
+                        <span class="factor-number">1</span>
+                        What is Your Task?
+                    </div>
+                    <div class="factor-content">
+                        <ul>
+                            <li><strong>Text Classification:</strong> Label text (sentiment, category, topic)</li>
+                            <li><strong>Text Generation:</strong> Write or generate responses</li>
+                            <li><strong>Embedding/Search:</strong> Find similar documents or relevance</li>
+                            <li><strong>Question Answering:</strong> Find answers from documents</li>
+                            <li><strong>Named Entity Recognition:</strong> Extract names, places, organizations</li>
+                        </ul>
+                        <div class="key-point">
+                            ✓ Match model type to your task
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Factor 2 -->
+                <div class="factor">
+                    <div class="factor-title">
+                        <span class="factor-number">2</span>
+                        Accuracy on Your Data
+                    </div>
+                    <div class="factor-content">
+                        <ul>
+                            <li>Test model on 50-100 of your real examples</li>
+                            <li><strong>Accuracy > 85%:</strong> Good ✓ Use it</li>
+                            <li><strong>Accuracy < 85%:</strong> Try different model</li>
+                            <li>Don't rely on benchmark scores alone</li>
+                        </ul>
+                        <div class="key-point">
+                            ✓ Always test on your own data first
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Factor 3 -->
+                <div class="factor">
+                    <div class="factor-title">
+                        <span class="factor-number">3</span>
+                        Speed (Latency)
+                    </div>
+                    <div class="factor-content">
+                        <ul>
+                            <li><strong>&lt; 100ms:</strong> Use small or quantized models</li>
+                            <li><strong>100-500ms:</strong> Medium models acceptable</li>
+                            <li><strong>&gt; 500ms:</strong> Any model works (batch processing)</li>
+                        </ul>
+                        <div class="key-point">
+                            ✓ Know your response time requirement before selecting
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Factor 4 -->
+                <div class="factor">
+                    <div class="factor-title">
+                        <span class="factor-number">4</span>
+                        Memory & Computing Power
+                    </div>
+                    <div class="factor-content">
+                        <ul>
+                            <li><strong>With GPU:</strong> Can use larger models (7B-13B parameters)</li>
+                            <li><strong>CPU only:</strong> Use small models (DistilBERT, TinyBERT)</li>
+                            <li><strong>API (CloudGPT, Claude):</strong> No hardware needed</li>
+                        </ul>
+                        <div class="key-point">
+                            ✓ Match model size to available hardware
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Factor 5 -->
+                <div class="factor">
+                    <div class="factor-title">
+                        <span class="factor-number">5</span>
+                        Cost
+                    </div>
+                    <div class="factor-content">
+                        <ul>
+                            <li><strong>Free:</strong> Open-source models (HuggingFace, GitHub)</li>
+                            <li><strong>Low Cost:</strong> Self-hosted models (~$50-200/month)</li>
+                            <li><strong>High Cost:</strong> API services (GPT-4: $500-2000+/month)</li>
+                        </ul>
+                        <div class="key-point">
+                            ✓ Calculate total cost including infrastructure
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Factor 6 -->
+                <div class="factor">
+                    <div class="factor-title">
+                        <span class="factor-number">6</span>
+                        Support & Documentation
+                    </div>
+                    <div class="factor-content">
+                        <ul>
+                            <li>Is it actively maintained? (Recent updates)</li>
+                            <li>Easy to install? (Has pip/conda package)</li>
+                            <li>Good documentation? (Examples, tutorials available)</li>
+                            <li>Community support? (StackOverflow, GitHub issues answered)</li>
+                        </ul>
+                        <div class="key-point">
+                            ✓ Choose models that are well-supported
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION 2: QUICK CHECKLIST -->
+            <div class="section">
+                <h2 class="section-title">Decision Checklist</h2>
+                <div class="checklist">
+                    <h3>Before Selecting a Model</h3>
+                    <div class="checklist-item">
+                        <div class="checkbox"></div>
+                        <span>Does it solve my task type?</span>
+                    </div>
+                    <div class="checklist-item">
+                        <div class="checkbox"></div>
+                        <span>Will it work well on my data? (Tested)</span>
+                    </div>
+                    <div class="checklist-item">
+                        <div class="checkbox"></div>
+                        <span>Is it fast enough for my use case?</span>
+                    </div>
+                    <div class="checklist-item">
+                        <div class="checkbox"></div>
+                        <span>Can my computer/server run it?</span>
+                    </div>
+                    <div class="checklist-item">
+                        <div class="checkbox"></div>
+                        <span>Is the cost within budget?</span>
+                    </div>
+                    <div class="checklist-item">
+                        <div class="checkbox"></div>
+                        <span>Is it well-documented and supported?</span>
+                    </div>
+                </div>
+                <p style="margin-top: 20px; color: #2e7d32; font-weight: 600;">✓ If YES to all → Use this model<br>✗ If NO to any → Try a different model</p>
+            </div>
+
+            <!-- SECTION 3: EXAMPLES -->
+            <div class="section">
+                <h2 class="section-title">Common Use Cases & Recommended Models</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Task</th>
+                            <th>Recommended Model</th>
+                            <th>Why?</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Sentiment Analysis (Good/Bad)</td>
+                            <td>DistilBERT</td>
+                            <td>Fast, accurate, small</td>
+                        </tr>
+                        <tr>
+                            <td>Document Classification</td>
+                            <td>RoBERTa-base</td>
+                            <td>Better accuracy, reasonable size</td>
+                        </tr>
+                        <tr>
+                            <td>Generate Text Responses</td>
+                            <td>GPT-3.5 / Claude API</td>
+                            <td>Best quality, no setup needed</td>
+                        </tr>
+                        <tr>
+                            <td>Search Similar Documents</td>
+                            <td>sentence-transformers</td>
+                            <td>Built for embeddings, lightweight</td>
+                        </tr>
+                        <tr>
+                            <td>Extract Names/Entities</td>
+                            <td>BERT-NER or RoBERTa-NER</td>
+                            <td>Specialized for NER task</td>
+                        </tr>
+                        <tr>
+                            <td>Question Answering</td>
+                            <td>BERT-base-SQuAD</td>
+                            <td>Pre-trained on Q&A data</td>
+                        </tr>
+                        <tr>
+                            <td>Code Generation</td>
+                            <td>CodeLLaMA / GPT-4</td>
+                            <td>Trained on programming data</td>
+                        </tr>
+                        <tr>
+                            <td>Low-Resource (CPU only)</td>
+                            <td>DistilBERT / MobileBERT</td>
+                            <td>Compact, fast</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- SECTION 4: KEY POINTS -->
+            <div class="section">
+                <h2 class="section-title">Remember</h2>
+                <div class="example-box">
+                    <div class="example-title">1. Test Before Committing</div>
+                    <div class="example-content">Always evaluate the model on your actual data. Benchmark scores from papers don't guarantee performance on your specific task.</div>
+                </div>
+                <div class="example-box">
+                    <div class="example-title">2. Accuracy vs Speed Trade-off</div>
+                    <div class="example-content">Larger models are more accurate but slower. Smaller models are faster but less accurate. Choose based on your priorities.</div>
+                </div>
+                <div class="example-box">
+                    <div class="example-title">3. Consider Total Cost</div>
+                    <div class="example-content">Include hardware, maintenance, and electricity costs. Not just the model price.</div>
+                </div>
+                <div class="example-box">
+                    <div class="example-title">4. Start Simple</div>
+                    <div class="example-content">Begin with smaller, simpler models. Scale up only if needed.</div>
+                </div>
+            </div>
+
+        </main>
+
+        <footer>
+            <p>Pre-Trained Model Selection Guide | L2 Training Material</p>
+        </footer>
+    </div>
+</body>
+</html>
