@@ -25,3 +25,5 @@ langchain_huggingface
 transformers
 
 torch
+
+langsmith
