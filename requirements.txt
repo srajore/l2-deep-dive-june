@@ -27,3 +27,5 @@ transformers
 torch
 
 langsmith
+
+gradio
