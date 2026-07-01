@@ -1,0 +1,162 @@
+ABC Technologies Employee Policy Handbook
+
+--------------------------------------------------
+1. COMPANY OVERVIEW
+--------------------------------------------------
+
+ABC Technologies is a software consulting and digital transformation company.
+The company provides cloud, AI, data engineering, and application development services to clients worldwide.
+
+--------------------------------------------------
+2. WORKING HOURS
+--------------------------------------------------
+
+Employees are expected to work 8 hours per day.
+
+Official working hours are:
+9:00 AM to 6:00 PM (Monday to Friday)
+
+Employees are allowed flexible login between 8:00 AM and 10:00 AM provided they complete their daily work hours.
+
+--------------------------------------------------
+3. WORK FROM HOME POLICY
+--------------------------------------------------
+
+Employees may work from home up to 3 days per week with manager approval.
+
+Remote employees must:
+
+- Attend all scheduled meetings
+- Be available during core hours (10:00 AM to 4:00 PM)
+- Maintain a stable internet connection
+- Follow all information security guidelines
+
+--------------------------------------------------
+4. LEAVE POLICY
+--------------------------------------------------
+
+Employees receive the following leave benefits each year:
+
+- 20 Paid Leave (PL)
+- 10 Sick Leave (SL)
+- 10 Casual Leave (CL)
+
+Unused Paid Leave can be carried forward up to 10 days into the next year.
+
+Sick Leave cannot be carried forward.
+
+Leave requests should be submitted at least 2 days in advance whenever possible.
+
+--------------------------------------------------
+5. EXPENSE REIMBURSEMENT
+--------------------------------------------------
+
+Employees can claim reimbursement for:
+
+- Business travel
+- Client meetings
+- Training programs approved by management
+- Internet expenses up to ₹1,500 per month
+
+Expense claims must be submitted within 30 days of the expense date.
+
+Receipts are mandatory for all claims above ₹500.
+
+--------------------------------------------------
+6. INFORMATION SECURITY POLICY
+--------------------------------------------------
+
+Employees must:
+
+- Use company-approved devices
+- Enable multi-factor authentication
+- Never share passwords
+- Lock systems when away from desks
+- Report security incidents immediately
+
+Sharing confidential customer information with unauthorized persons is strictly prohibited.
+
+Violation of security policies may lead to disciplinary action.
+
+--------------------------------------------------
+7. DRESS CODE POLICY
+--------------------------------------------------
+
+Business casual attire is required when visiting client locations.
+
+Employees may wear smart casuals while working from company offices.
+
+Clothing that contains offensive language or images is not permitted.
+
+--------------------------------------------------
+8. TRAINING AND LEARNING
+--------------------------------------------------
+
+All employees are encouraged to complete at least 20 hours of training annually.
+
+ABC Technologies provides access to:
+
+- AI and Machine Learning courses
+- Cloud certifications
+- Technical workshops
+- Leadership development programs
+
+The company reimburses certification costs for approved certifications upon successful completion.
+
+--------------------------------------------------
+9. PERFORMANCE REVIEW
+--------------------------------------------------
+
+Performance reviews are conducted twice a year.
+
+Employees are evaluated on:
+
+- Technical skills
+- Quality of work
+- Teamwork
+- Customer satisfaction
+- Innovation
+
+Outstanding performers may be eligible for bonuses and promotions.
+
+--------------------------------------------------
+10. HEALTH INSURANCE
+--------------------------------------------------
+
+Full-time employees are eligible for company-sponsored health insurance.
+
+Coverage includes:
+
+- Employee
+- Spouse
+- Up to two dependent children
+
+The annual insurance coverage amount is ₹5,00,000.
+
+--------------------------------------------------
+11. CODE OF CONDUCT
+--------------------------------------------------
+
+Employees must maintain professional behavior at all times.
+
+Harassment, discrimination, and workplace violence are strictly prohibited.
+
+Employees should treat colleagues, customers, and partners with respect.
+
+Any violation of the code of conduct may result in disciplinary action.
+
+--------------------------------------------------
+12. CONTACT INFORMATION
+--------------------------------------------------
+
+For HR-related queries contact:
+
+Email: hr@abctech.com
+Phone: +91-20-5555-1234
+
+For IT support contact:
+
+Email: itsupport@abctech.com
+Phone: +91-20-5555-5678
+
+End of Document
