@@ -29,3 +29,14 @@ torch
 langsmith
 
 gradio
+
+langchain_chroma
+
+langchain
+
+langchain
+langchain-core
+langchain-chroma
+langchain-ollama
+langgraph
+langchain_classic
